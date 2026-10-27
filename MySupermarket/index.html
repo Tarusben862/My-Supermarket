@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My SuperMart | Everyday Shopping</title>
+
+<style>
+:root {
+    --green: #087f5b;
+    --dark-green: #056044;
+    --light-green: #e5f6ed;
+    --orange: #ffad42;
+    --background: #f5f8f7;
+    --white: #ffffff;
+    --text: #20332b;
+    --muted: #68776f;
+    --border: #e1eae5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    background: var(--green);
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffd18b;
+}
+
+.tagline {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.header-search {
+    flex: 1;
+    max-width: 500px;
+}
+
+.header-search input {
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cart-badge {
+    background: var(--orange);
+    color: #222;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.container {
+    max-width: 1450px;
+    margin: auto;
+    padding: 24px;
+}
+
+/* Welcome banner */
+
+.hero {
+    background: linear-gradient(120deg, #d7f5df, #fff4d9);
+    border-radius: 18px;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 4vw, 42px);
+    color: var(--dark-green);
+    margin: 0 0 12px;
+}
+
+.hero p {
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.hero-emoji {
+    font-size: clamp(65px, 10vw, 115px);
+}
+
+.primary-button {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.primary-button:hover {
+    background: var(--dark-green);
+}
+
+/* Features */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 22px 0;
+}
+
+.feature {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.feature-icon {
+    font-size: 30px;
+}
+
+/* Categories */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 28px 0 16px;
+}
+
+.section-heading h2 {
+    margin: 0;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.category-button {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+}
+
+.category-button.active,
+.category-button:hover {
+    background: var(--green);
+    color: white;
+}
+
+/* Product cards */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.product {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px #00000010;
+}
+
+.product-image {
+    height: 120px;
+    background: #f0f8f3;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 65px;
+    margin-bottom: 12px;
+}
+
+.product h3 {
+    font-size: 16px;
+    margin: 4px 0 8px;
+}
+
+.product-category {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--green);
+    margin: 4px 0 12px;
+}
+
+.price small {
+    color: var(--muted);
+    font-weight: normal;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: auto;
+    margin-bottom: 12px;
+}
+
+.quantity-control button {
+    border: 1px solid var(--border);
+    background: #eff7f2;
+    border-radius: 6px;
+    padding: 7px 11px;
+    color: var(--green);
+    font-weight: bold;
+}
+
+.quantity-control input {
+    width: 45px;
+    padding: 7px 3px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.add-button {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 5px;
+    font-weight: bold;
+}
+
+.add-button:hover {
+    background: var(--dark-green);
+}
+
+.no-results {
+    display: none;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+}
+
+/* Shopping cart */
+
+.cart-section {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 22px;
+    align-items: start;
+}
+
+.cart-box, .checkout-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.cart-box h2, .checkout-box h2 {
+    margin-top: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info small {
+    display: block;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.remove-button {
+    background: #ffe8e8;
+    color: #b42318;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 21px;
+    font-weight: bold;
+    margin: 22px 0;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.clear-button {
+    background: #edf2ef;
+    color: var(--text);
+    border: none;
+    border-radius: 7px;
+    padding: 12px 15px;
+}
+
+.checkout-button {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 18px;
+    flex: 1;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 25px 10px;
+    color: var(--muted);
+}
+
+.empty-cart div {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+/* Checkout form */
+
+.checkout-box label {
+    display: block;
+    margin: 14px 0 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.checkout-box input,
+.checkout-box textarea,
+.checkout-box select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccd8d0;
+    border-radius: 7px;
+    background: white;
+}
+
+.checkout-box textarea {
+    resize: vertical;
+    min-height: 75px;
+}
+
+.checkout-box .checkout-button {
+    margin-top: 18px;
+    width: 100%;
+}
+
+.small-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 45px;
+    background: #e3f4e9;
+    padding: 28px 20px;
+    text-align: center;
+}
+
+footer h2 {
+    color: var(--green);
+}
+
+footer p {
+    color: #52675b;
+}
+
+/* Responsive design */
+
+@media (max-width: 1100px) {
+    .products {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cart-section {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    header {
+        padding: 18px;
+    }
+
+    .header-search {
+        flex-basis: 100%;
+        order: 3;
+    }
+
+    .container {
+        padding: 14px;
+    }
+
+    .hero {
+        padding: 22px;
+    }
+
+    .hero-emoji {
+        font-size: 55px;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .product {
+        padding: 10px;
+    }
+
+    .product-image {
+        height: 95px;
+        font-size: 48px;
+    }
+
+    .product h3 {
+        font-size: 14px;
+    }
+
+    .categories {
+        gap: 7px;
+    }
+
+    .category-button {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <div class="logo">🛒 My <span>SuperMart</span></div>
+        <div class="tagline">Fresh Products • Better Living</div>
+    </div>
+
+    <div class="header-search">
+        <input
+            type="search"
+            id="searchBox"
+            placeholder="🔍 Search rice, milk, soap..."
+            oninput="searchProducts()"
+            aria-label="Search products"
+        >
+    </div>
+
+    <nav class="header-links">
+        <a href="#home">🏠 Home</a>
+        <a href="#cart">🛒 Cart <span class="cart-badge" id="cartCount">0</span></a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <!-- Welcome banner -->
+
+    <section class="hero" id="home">
+        <div>
+            <h1>Fresh Groceries<br>for a Healthier You!</h1>
+
+            <p>
+                Shop your everyday essentials in one place.
+                Enjoy convenient shopping, clear prices and a
+                simple way to calculate your spending.
+            </p>
+
+            <a href="#productsSection" class="primary-button">
+                Start Shopping →
+            </a>
+        </div>
+
+        <div class="hero-emoji">🥦 🥕 🍎</div>
+    </section>
+
+    <!-- Store features -->
+
+    <section class="features">
+        <div class="feature">
+            <div class="feature-icon">🛍️</div>
+            <div>
+                <strong>Easy Shopping</strong>
+                <div class="small-note">Find everyday essentials quickly.</div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">💰</div>
+            <div>
+                <strong>Know Your Budget</strong>
+                <div class="small-note">See your shopping total instantly.</div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🏡</div>
+            <div>
+                <strong>Everyday Essentials</strong>
+                <div class="small-note">Food, cleaning and personal care.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product categories -->
+
+    <section id="productsSection">
+        <div class="section-heading">
+            <h2>Shop by Category</h2>
+        </div>
+
+        <div class="categories">
+            <button class="category-button active" onclick="filterCategory('All', this)">🛍️ All</button>
+            <button class="category-button" onclick="filterCategory('Grains', this)">🌾 Grains</button>
+            <button class="category-button" onclick="filterCategory('Dairy', this)">🥛 Dairy & Eggs</button>
+            <button class="category-button" onclick="filterCategory('Produce', this)">🥦 Fresh Produce</button>
+            <button class="category-button" onclick="filterCategory('Beverages', this)">🥤 Beverages</button>
+            <button class="category-button" onclick="filterCategory('Household', this)">🧺 Household</button>
+            <button class="category-button" onclick="filterCategory('Personal Care', this)">🧴 Personal Care</button>
+            <button class="category-button" onclick="filterCategory('Snacks', this)">🍪 Snacks</button>
+        </div>
+
+        <div class="section-heading">
+            <h2>🛒 Our Products</h2>
+            <span class="small-note">Fresh • Quality • Affordable</span>
+        </div>
+
+        <div class="products" id="productList"></div>
+
+        <div class="no-results" id="noResults">
+            <div style="font-size:40px;">🔎</div>
+            <h3>No products found</h3>
+            <p>Try another product name or choose a different category.</p>
+            <button class="primary-button" onclick="resetSearch()">Show All Products</button>
+        </div>
+    </section>
+
+    <!-- Shopping cart and checkout -->
+
+    <section class="cart-section" id="cart">
+
+        <div class="cart-box">
+            <h2>🛒 Your Shopping Cart</h2>
+
+            <div id="cartItems">
+                <div class="empty-cart">
+                    <div>🛒</div>
+                    <strong>Your cart is empty</strong>
+                    <p>Add your favourite products to start shopping.</p>
+                </div>
+            </div>
+
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>KSh <span id="total">0.00</span></span>
+            </div>
+
+            <div class="cart-actions">
+                <button class="clear-button" onclick="clearCart()">🗑 Clear Cart</button>
+                <button class="checkout-button" onclick="goToCheckout()">Proceed to Checkout →</button>
+            </div>
+        </div>
+
+        <form class="checkout-box" id="checkoutForm" onsubmit="placeOrder(event)">
+            <h2>📦 Checkout</h2>
+
+            <p class="small-note">
+                Enter your details to prepare your order.
+            </p>
+
+            <label for="customerName">Full Name</label>
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label for="customerPhone">Phone Number</label>
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="e.g. 0712345678"
+                pattern="[0-9+ ]{10,15}"
+                title="Enter a valid phone number"
+                required
+            >
+
+            <label for="deliveryAddress">Delivery Address</label>
+            <textarea
+                id="deliveryAddress"
+                placeholder="Enter your area and delivery address"
+                required
+            ></textarea>
+
+            <label for="paymentMethod">Payment Preference</label>
+            <select id="paymentMethod" required>
+                <option value="">Choose payment preference</option>
+                <option value="Cash on delivery">Cash on delivery</option>
+                <option value="M-Pesa on delivery">M-Pesa on delivery</option>
+            </select>
+
+            <button type="submit" class="checkout-button">
+                Confirm Order
+            </button>
+
+            <p class="small-note">
+                Demo only: this page does not send orders, collect
+                payments or contact a real supermarket.
+            </p>
+        </form>
+
+    </section>
+
+</main>
+
+<footer>
+    <h2>🌿 Good Food, Good Life!</h2>
+    <p>Shop smart. Save money. Enjoy everyday living.</p>
+    <p>My SuperMart © 2026 | Everyday Shopping Made Simple</p>
+</footer>
+
+<script>
+const products = [
+    {id: 1, name: "Rice", price: 250, unit: "kg", category: "Grains", emoji: "🍚"},
+    {id: 2, name: "Maize Flour", price: 150, unit: "packet", category: "Grains", emoji: "🌽"},
+    {id: 3, name: "Wheat Flour", price: 160, unit: "packet", category: "Grains", emoji: "🌾"},
+    {id: 4, name: "Beans", price: 200, unit: "kg", category: "Grains", emoji: "🫘"},
+    {id: 5, name: "Green Grams", price: 180, unit: "kg", category: "Grains", emoji: "🫛"},
+    {id: 6, name: "Sugar", price: 180, unit: "kg", category: "Grains", emoji: "🧂"},
+    {id: 7, name: "Salt", price: 40, unit: "packet", category: "Grains", emoji: "🧂"},
+    {id: 8, name: "Cooking Oil", price: 300, unit: "litre", category: "Grains", emoji: "🛢️"},
+    {id: 9, name: "Bread", price: 65, unit: "loaf", category: "Grains", emoji: "🍞"},
+    {id: 10, name: "Milk", price: 70, unit: "litre", category: "Dairy", emoji: "🥛"},
+    {id: 11, name: "Yoghurt", price: 100, unit: "cup", category: "Dairy", emoji: "🥣"},
+    {id: 12, name: "Eggs", price: 20, unit: "egg", category: "Dairy", emoji: "🥚"},
+    {id: 13, name: "Cheese", price: 250, unit: "packet", category: "Dairy", emoji: "🧀"},
+    {id: 14, name: "Tomatoes", price: 100, unit: "kg", category: "Produce", emoji: "🍅"},
+    {id: 15, name: "Potatoes", price: 100, unit: "kg", category: "Produce", emoji: "🥔"},
+    {id: 16, name: "Onions", price: 120, unit: "kg", category: "Produce", emoji: "🧅"},
+    {id: 17, name: "Carrots", price: 100, unit: "kg", category: "Produce", emoji: "🥕"},
+    {id: 18, name: "Cabbage", price: 80, unit: "piece", category: "Produce", emoji: "🥬"},
+    {id: 19, name: "Sukuma Wiki", price: 30, unit: "bunch", category: "Produce", emoji: "🥬"},
+    {id: 20, name: "Bananas", price: 100, unit: "bunch", category: "Produce", emoji: "🍌"},
+    {id: 21, name: "Apples", price: 250, unit: "kg", category: "Produce", emoji: "🍎"},
+    {id: 22, name: "Oranges", price: 150, unit: "kg", category: "Produce", emoji: "🍊"},
+    {id: 23, name: "Bottled Water", price: 50, unit: "bottle", category: "Beverages", emoji: "💧"},
+    {id: 24, name: "Tea Leaves", price: 120, unit: "packet", category: "Beverages", emoji: "🍵"},
+    {id: 25, name: "Coffee", price: 250, unit: "packet", category: "Beverages", emoji: "☕"},
+    {id: 26, name: "Fruit Juice", price: 150, unit: "litre", category: "Beverages", emoji: "🧃"},
+    {id: 27, name: "Biscuits", price: 80, unit: "packet", category: "Snacks", emoji: "🍪"},
+    {id: 28, name: "Potato Crisps", price: 100, unit: "packet", category: "Snacks", emoji: "🍟"},
+    {id: 29, name: "Peanut Butter", price: 250, unit: "jar", category: "Snacks", emoji: "🥜"},
+    {id: 30, name: "Chocolate", price: 120, unit: "bar", category: "Snacks", emoji: "🍫"},
+    {id: 31, name: "Washing Powder", price: 250, unit: "packet", category: "Household", emoji: "🧺"},
+    {id: 32, name: "Bar Soap", price: 100, unit: "bar", category: "Household", emoji: "🧼"},
+    {id: 33, name: "Dishwashing Liquid", price: 180, unit: "bottle", category: "Household", emoji: "🧽"},
+    {id: 34, name: "Toilet Paper", price: 150, unit: "pack", category: "Household", emoji: "🧻"},
+    {id: 35, name: "Garbage Bags", price: 120, unit: "pack", category: "Household", emoji: "🗑️"},
+    {id: 36, name: "Tissues", price: 120, unit: "pack", category: "Household", emoji: "🤧"},
+    {id: 37, name: "Toothpaste", price: 180, unit: "tube", category: "Personal Care", emoji: "🪥"},
+    {id: 38, name: "Toothbrush", price: 100, unit: "piece", category: "Personal Care", emoji: "🪥"},
+    {id: 39, name: "Shampoo", price: 300, unit: "bottle", category: "Personal Care", emoji: "🧴"},
+    {id: 40, name: "Body Lotion", price: 350, unit: "bottle", category: "Personal Care", emoji: "🧴"},
+    {id: 41, name: "Sanitary Pads", price: 150, unit: "pack", category: "Personal Care", emoji: "🌸"},
+    {id: 42, name: "Cooking Spices", price: 70, unit: "pack", category: "Grains", emoji: "🫙"}
+];
+
+let cart = {};
+let selectedCategory = "All";
+
+const productList = document.getElementById("productList");
+
+function renderProducts() {
+    const searchText = document
+        .getElementById("searchBox")
+        .value
+        .trim()
+        .toLowerCase();
+
+    productList.innerHTML = "";
+    let visibleCount = 0;
+
+    products.forEach(function(product) {
+        const matchesSearch =
+            product.name.toLowerCase().includes(searchText);
+
+        const matchesCategory =
+            selectedCategory === "All" ||
+            product.category === selectedCategory;
+
+        if (!matchesSearch || !matchesCategory) {
+            return;
+        }
+
+        visibleCount++;
+
+        const card = document.createElement("article");
+        card.className = "product";
+
+        const image = document.createElement("div");
+        image.className = "product-image";
+        image.textContent = product.emoji;
+        image.setAttribute("aria-hidden", "true");
+
+        const category = document.createElement("div");
+        category.className = "product-category";
+        category.textContent = product.category;
+
+        const name = document.createElement("h3");
+        name.textContent = product.name;
+
+        const price = document.createElement("div");
+        price.className = "price";
+        price.innerHTML =
+            "KSh " + product.price.toLocaleString("en-KE") +
+            ' <small>/ ' + product.unit + "</small>";
+
+        const quantityControl = document.createElement("div");
+        quantityControl.className = "quantity-control";
+
+        const minusButton = document.createElement("button");
+        minusButton.type = "button";
+        minusButton.textContent = "−";
+        minusButton.setAttribute("aria-label", "Decrease quantity");
+
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.min = "1";
+        quantityInput.step = "1";
+        quantityInput.value = "1";
+        quantityInput.id = "qty-" + product.id;
+        quantityInput.setAttribute("aria-label", product.name + " quantity");
+
+        const plusButton = document.createElement("button");
+        plusButton.type = "button";
+        plusButton.textContent = "+";
+        plusButton.setAttribute("aria-label", "Increase quantity");
+
+        minusButton.addEventListener("click", function() {
+            const current = Number(quantityInput.value) || 1;
+            quantityInput.value = Math.max(1, current - 1);
+        });
+
+        plusButton.addEventListener("click", function() {
+            const current = Number(quantityInput.value) || 0;
+            quantityInput.value = Math.max(1, current + 1);
+        });
+
+        quantityControl.append(minusButton, quantityInput, plusButton);
+
+        const addButton = document.createElement("button");
+        addButton.className = "add-button";
+        addButton.type = "button";
+        addButton.textContent = "🛒 Add to Cart";
+
+        addButton.addEventListener("click", function() {
+            addToCart(product.id, quantityInput.value);
+        });
+
+        card.append(
+            image,
+            category,
+            name,
+            price,
+            quantityControl,
+            addButton
+        );
+
+        productList.appendChild(card);
+    });
+
+    document.getElementById("noResults").style.display =
+        visibleCount === 0 ? "block" : "none";
+}
+
+function searchProducts() {
+    renderProducts();
+}
+
+function filterCategory(category, button) {
+    selectedCategory = category;
+
+    document.querySelectorAll(".category-button").forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    renderProducts();
+}
+
+function resetSearch() {
+    document.getElementById("searchBox").value = "";
+    selectedCategory = "All";
+
+    document.querySelectorAll(".category-button").forEach(function(button) {
+        button.classList.remove("active");
+    });
+
+    document.querySelector(".category-button").classList.add("active");
+    renderProducts();
+}
+
+function addToCart(productId, quantityValue) {
+    const quantity = Number(quantityValue);
+
+    if (!Number.isInteger(quantity) || quantity < 1) {
+        alert("Please enter a valid whole-number quantity.");
+        return;
+    }
+
+    const product = products.find(function(item) {
+        return item.id === productId;
+    });
+
+    if (!product) {
+        alert("Product not found.");
+        return;
+    }
+
+    if (!cart[productId]) {
+        cart[productId] = {
+            product: product,
+            quantity: 0
+        };
+    }
+
+    cart[productId].quantity += quantity;
+
+    renderCart();
+}
+
+function changeCartQuantity(productId, change) {
+    if (!cart[productId]) {
+        return;
+    }
+
+    cart[productId].quantity += change;
+
+    if (cart[productId].quantity <= 0) {
+        delete cart[productId];
+    }
+
+    renderCart();
+}
+
+function removeFromCart(productId) {
+    delete cart[productId];
+    renderCart();
+}
+
+function clearCart() {
+    if (Object.keys(cart).length === 0) {
+        return;
+    }
+
+    if (confirm("Are you sure you want to clear your cart?")) {
+        cart = {};
+        renderCart();
+    }
+}
+
+function renderCart() {
+    const cartItems = document.getElementById("cartItems");
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let itemCount = 0;
+
+    const cartEntries = Object.values(cart);
+
+    if (cartEntries.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-cart";
+
+        const icon = document.createElement("div");
+        icon.textContent = "🛒";
+
+        const title = document.createElement("strong");
+        title.textContent = "Your cart is empty";
+
+        const message = document.createElement("p");
+        message.textContent =
+            "Add your favourite products to start shopping.";
+
+        empty.append(icon, title, message);
+        cartItems.appendChild(empty);
+    }
+
+    cartEntries.forEach(function(entry) {
+        const product = entry.product;
+        const quantity = entry.quantity;
+        const subtotal = product.price * quantity;
+
+        total += subtotal;
+        itemCount += quantity;
+
+        const row = document.createElement("div");
+        row.className = "cart-item";
+
+        const info = document.createElement("div");
+        info.className = "cart-item-info";
+
+        const name = document.createElement("strong");
+        name.textContent = product.emoji + " " + product.name;
+
+        const details = document.createElement("small");
+        details.textContent =
+            quantity + " × KSh " + product.price +
+            " = KSh " + subtotal.toLocaleString("en-KE");
+
+        const controls = document.createElement("div");
+        controls.style.display = "flex";
+        controls.style.alignItems = "center";
+        controls.style.gap = "5px";
+
+        const minus = document.createElement("button");
+        minus.className = "clear-button";
+        minus.type = "button";
+        minus.textContent = "−";
+        minus.setAttribute("aria-label", "Decrease " + product.name);
+        minus.addEventListener("click", function() {
+            changeCartQuantity(product.id, -1);
+        });
+
+        const quantityText = document.createElement("span");
+        quantityText.textContent = quantity;
+
+        const plus = document.createElement("button");
+        plus.className = "clear-button";
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.setAttribute("aria-label", "Increase " + product.name);
+        plus.addEventListener("click", function() {
+            changeCartQuantity(product.id, 1);
+        });
+
+        const remove = document.createElement("button");
+        remove.className = "remove-button";
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", function() {
+            removeFromCart(product.id);
+        });
+
+        info.append(name, details);
+        controls.append(minus, quantityText, plus, remove);
+        row.append(info, controls);
+        cartItems.appendChild(row);
+    });
+
+    document.getElementById("total").textContent =
+        total.toLocaleString("en-KE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    document.getElementById("cartCount").textContent = itemCount;
+}
+
+function goToCheckout() {
+    if (Object.keys(cart).length === 0) {
+        alert("Your cart is empty. Please add products first.");
+        return;
+    }
+
+    document.getElementById("checkoutForm").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    document.getElementById("customerName").focus();
+}
+
+function placeOrder(event) {
+    event.preventDefault();
+
+    if (Object.keys(cart).length === 0) {
+        alert("Your cart is empty. Please add products first.");
+        return;
+    }
+
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("deliveryAddress").value.trim();
+    const payment = document.getElementById("paymentMethod").value;
+
+    if (!name || !phone || !address || !payment) {
+        alert("Please complete all checkout fields.");
+        return;
+    }
+
+    let total = 0;
+    let orderDetails = "";
+
+    Object.values(cart).forEach(function(entry) {
+        const subtotal = entry.product.price * entry.quantity;
+        total += subtotal;
+
+        orderDetails +=
+            "\n- " + entry.product.name +
+            " × " + entry.quantity +
+            " = KSh " + subtotal.toLocaleString("en-KE");
+    });
+
+    const orderMessage =
+        "ORDER SUMMARY\n\n" +
+        "Customer: " + name + "\n" +
+        "Phone: " + phone + "\n" +
+        "Address: " + address + "\n" +
+        "Payment preference: " + payment + "\n\n" +
+        "ITEMS:" + orderDetails + "\n\n" +
+        "TOTAL: KSh " + total.toLocaleString("en-KE") +
+        "\n\nThis is a demonstration. No order has been sent to a real shop.";
+
+    alert(orderMessage);
+}
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
